@@ -1,1 +1,21 @@
-<p>book-edit works!</p>
+<h1>Update</h1>
+<form [formGroup]="bookForm" (ngSubmit) =edit()>
+  <table>
+    <tr>
+      <td>title:</td>
+      <td><input type="text" formControlName="title" ></td>
+    </tr>
+    <tr>
+      <td>author</td>
+      <td><input type="text" formControlName="author"></td>
+    </tr>
+    <tr>
+      <td>descriptionm</td>
+      <td><textarea type="text" style="width: 250px;height: 200px" formControlName="description"></textarea></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button>Update</button></td>
+    </tr>
+  </table>
+</form>

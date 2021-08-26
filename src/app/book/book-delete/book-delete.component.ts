@@ -1,15 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {Book} from '../../model/book';
 import {FormControl, FormGroup} from '@angular/forms';
-import {BookService} from '../../service/book.service';
+import {Book} from '../../model/book';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {BookService} from '../../service/book.service';
+
+class BookServiceService {
+}
 
 @Component({
-  selector: 'app-book-edit',
-  templateUrl: './book-edit.component.html',
-  styleUrls: ['./book-edit.component.scss']
+  selector: 'app-book-delete',
+  templateUrl: './book-delete.component.html',
+  styleUrls: ['./book-delete.component.scss']
 })
-export class BookEditComponent implements OnInit {
+export class BookDeleteComponent implements OnInit {
   id: any;
   bookForm: FormGroup;
   book: Book = {
@@ -20,25 +23,15 @@ export class BookEditComponent implements OnInit {
   };
 
   constructor(private bookService: BookService,
-              private activateRouter: ActivatedRoute,
+              private activeRouter: ActivatedRoute,
               private router: Router) {
-    this.activateRouter.paramMap.subscribe((paraMap: ParamMap) => {
+    this.activeRouter.paramMap.subscribe((paraMap: ParamMap) => {
       this.id = paraMap.get('id');
-      this.getBook(this.id);
     });
   }
 
-  ngOnInit() {
-  }
-
-  edit() {
-    this.book.title = this.bookForm.value.title;
-    this.book.author = this.bookForm.value.author;
-    this.book.description = this.bookForm.value.description;
-    this.bookService.updateBook(this.id, this.book).subscribe(data => {
-      this.router.navigate(['']);
-    });
-
+  ngOnInit(): void {
+    this.getBook(this.id);
   }
 
   getBook(id: number) {
@@ -48,9 +41,14 @@ export class BookEditComponent implements OnInit {
         title: new FormControl(data.title),
         author: new FormControl(data.author),
         description: new FormControl(data.description),
-
       });
     });
+  }
 
+  deleteBook(id: number) {
+    console.log(id);
+    this.bookService.deleteBook(id).subscribe(data => {
+      this.router.navigate(['']);
+    });
   }
 }

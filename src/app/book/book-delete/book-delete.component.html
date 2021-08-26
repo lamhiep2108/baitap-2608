@@ -1,0 +1,32 @@
+<form [formGroup]="bookForm" (ngSubmit)="deleteBook(id)" >
+  <table>
+    <tr>
+      <td>Title</td>
+      <td>
+        <input type="text" formControlName="title">
+      </td>
+    </tr><tr>
+    <td>Author</td>
+    <td>
+      <input type="text" formControlName="author">
+    </td>
+  </tr><tr>
+    <td>Description</td>
+    <td>
+      <input type="text" formControlName="description">
+    </td>
+  </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit">Xóa</button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a [routerLink]="['']">Thoát</a>
+      </td>
+    </tr>
+
+  </table>
+</form>
